@@ -1,20 +1,69 @@
 <%-include("header");-%>
+<div class="container">
+    <div class="menu toggle" onclick="toggleMenu()"></div>
+  <div class="side">
+    <%-include("list-head");-%>
+    <!-- Show the names of List -->
+    <% newCustomList.forEach(function(list){%>
+        <form action="/deleteList" method="post">
+        <div class="list-item">
+        <a href="<%=list.name%>"> <%=list.name%> </a>
+        <input class="delete" type="image" src="/images/delete.png" onClick= "this.form.submit()" />
+        <input type="hidden" name="list_name" value="<%=list.name%>" />
+        <input type="hidden" name="list_id" value="<%=list.id%>" />
+    </div>
+    </form>
+    <% }); %>
+    </div>
+    <form class="item list-form" action="/addList" method="post">
+        <input id="list-input"
+          type="text"
+          name="newList"
+          placeholder="New List"
+          autocomplete="off"
+        />
+        <button id="list-button" type="submit" name="newListB" ><i class="fa-duotone fa-plus"></i></button>
+      </form>
+  </div>
+  <div class="main">
     <div class="box" id="heading">
-    <h1> <%= ListTitle %> </h1>
+      <h1><%= ListTitle %></h1>
     </div>
     <div class="box">
-        <% newListItems.forEach(function(item){%>
-            <form action="/delete" method="post">
-            <div class="item">
-                <input type="checkbox" onChange="this.form.submit()" name="checkbox" value="<%=item._id%>">
-                <p><%=item.name%></p>
-                <input type="hidden" name="listName" value="<%=ListTitle%>">
-            </div>
-        </form>
-        <% }); %>
-        <form class="item" action="/" method="post">
-            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-            <button type="submit" name="list" value= "<%= ListTitle %>" >+</button>
-        </form> 
+      <% newListItems.forEach(function(item){%>
+      <form action="/delete" method="post">
+        <div class="item">
+          <input
+            type="checkbox"
+            onChange="this.form.submit()"
+            name="checkbox"
+            value="<%=item._id%>"
+          />
+          <p><%=item.name%></p>
+          <input type="hidden" name="listName" value="<%=ListTitle%>" />
+        </div>
+      </form>
+      <% }); %>
+      <form class="item" action="/" method="post">
+        <input class="newItem"
+          type="text"
+          name="newItem"
+          placeholder="New Item"
+          autocomplete="off"
+        />
+        <button type="submit" name="list" value="<%= ListTitle %>"><i class="fa-duotone fa-plus"></i></button>
+      </form>
+    </div>
+  </div>
 </div>
+<script type="text/javascript">
+    function toggleMenu(){
+        let side = document.querySelector(".side");
+        side.classList.toggle("active");
+        let main = document.querySelector(".main");
+        main.classList.toggle("active");
+        let toggle = document.querySelector(".toggle");
+        toggle.classList.toggle("active");
+    }
+</script>
 <%-include("footer");-%>

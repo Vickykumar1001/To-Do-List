@@ -43,7 +43,10 @@ app.get("/",function(req , res){
             });
             res.redirect("/");
         } else{
-        res.render("list",{ListTitle: day, newListItems: items});
+            List.find({},function(err,customLists){
+                res.render("list",{ListTitle: day, newListItems: items, newCustomList:customLists});
+            })
+        
         }
     });
 });
@@ -59,10 +62,12 @@ app.get("/:customListName", function(req,res){
                     items : defaultItems
                 });
                 list.save();
-                res.redirect("/"+customListName)
+                res.redirect("/"+customListName);
             } else{
                 // Reading new list
-                res.render("list",{ListTitle: foundList.name , newListItems: foundList.items});
+                List.find({},function(err,customLists){
+                res.render("list",{ListTitle: foundList.name , newListItems: foundList.items , newCustomList:customLists});
+                });
             }
         }
     });
@@ -107,6 +112,32 @@ app.post("/delete",function(req,res){
     }
     
 });
+app.post("/addList",function(req,res){
+    const customListName = _.capitalize(req.body.newList);
+    List.findOne({name : customListName}, function(err,foundList){
+        if(!err){
+            if(!foundList){
+                //Creating new list
+                const list = new List({
+                    name : customListName,
+                    items : defaultItems
+                });
+                list.save();
+                res.redirect("/"+customListName);
+            }
+        }
+    });
+});
+app.post("/deleteList", function(req,res){
+    const id=req.body.list_id;
+    const name=req.body.list_name;
+    List.findByIdAndRemove(id, function(err){
+        if(err){
+            console.log(err);
+        }
+        res.redirect("/");
+    });
+})
 // const port = process.env.PORT || 3000;
 app.listen(3000,function(){
     console.log("Server is running on port 3000");
