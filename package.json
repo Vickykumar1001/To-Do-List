@@ -1,0 +1,32 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": "A To Do List app that remember and organise your WORK.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vickykumar1001/To-Do-List.git"
+  },
+  "keywords": [
+    "To",
+    "Do",
+    "List"
+  ],
+  "author": "Vicky Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vickykumar1001/To-Do-List/issues"
+  },
+  "homepage": "https://github.com/Vickykumar1001/To-Do-List#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.9.0"
+  }
+}
