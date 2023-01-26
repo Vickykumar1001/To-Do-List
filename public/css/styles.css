@@ -91,7 +91,18 @@ input[type="text"]:focus {
 }
 
 footer {
-  color: white;
+  background-image:linear-gradient(75deg,#8f41ee5c, #fc64f793,#8f41ee5a);
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  /* position: relative; */
+  max-width: 450px;
+  margin:auto;
+  border-radius: 5px ;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+footer p{
+  font-weight: 400;
+  padding:10px;
+  margin:0;
+  color: white
 }
