@@ -7,7 +7,7 @@
     <% newCustomList.forEach(function(list){%>
         <form action="/deleteList" method="post">
         <div class="list-item">
-        <a href="<%=list.name%>"> <%=list.name%> </a>
+         <a href="<%=list.name%>"> <%=list.name%> </a>
         <input class="delete" type="image" src="/images/delete.png" onClick= "this.form.submit()" />
         <input type="hidden" name="list_name" value="<%=list.name%>" />
         <input type="hidden" name="list_id" value="<%=list.id%>" />
