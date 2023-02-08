@@ -1,10 +1,12 @@
+require('dotenv').config();
 const express=require("express");
 const bodyParser=require("body-parser");
 const date=require(__dirname+"/date.js");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery',false);
-mongoose.connect("mongodb://localhost:27017/todoDB" ,{useNewUrlParser: true,useUnifiedTopology: true,family: 4,});
+const url=process.env.DB_URL;
+mongoose.connect( url ,{useNewUrlParser: true,useUnifiedTopology: true,family: 4,});
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -138,7 +140,7 @@ app.post("/deleteList", function(req,res){
         res.redirect("/");
     });
 })
-// const port = process.env.PORT || 3000;
-app.listen(3000,function(){
-    console.log("Server is running on port 3000");
+const port = process.env.PORT || 3000;
+app.listen(port,function(){
+    console.log("Server is running)");
 })
